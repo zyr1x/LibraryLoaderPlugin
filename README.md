@@ -159,10 +159,6 @@ Dependencies with scopes `test`, `provided`, `system` and `optional` are **ignor
 
 ---
 
-## 🎯 Minecraft Plugins
-
-LibraryLoader is especially useful for Minecraft plugins. On newer Paper versions you can load libraries natively, but on older versions only Maven Central is supported with no custom repositories. LibraryLoader solves this — it works the same way across **any server version** from 1.8 to 1.21, pulling libraries from any repository without restrictions.
-
 ```kotlin
 class MyPlugin : JavaPlugin() {
     override fun onEnable() {
