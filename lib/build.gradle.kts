@@ -5,7 +5,7 @@ plugins {
     id("com.gradle.plugin-publish") version "2.1.0"
 }
 
-group = "ru.lewis"
+group = "io.github.zyr1x"
 version = "1.0.0"
 
 gradlePlugin {
@@ -14,7 +14,7 @@ gradlePlugin {
 
     plugins {
         register("libraryLoader") {
-            id = "ru.lewis.plugin.libraryloader"
+            id = "io.github.zyr1x.libraryloader"
             implementationClass = "ru.lewis.plugin.libraryloader.LibraryLoaderPlugin"
             displayName = "Library Loader"
             description = "Generates libraries.toml into jar resources"
@@ -25,7 +25,4 @@ gradlePlugin {
 
 repositories {
     mavenCentral()
-}
-
-dependencies {
 }
