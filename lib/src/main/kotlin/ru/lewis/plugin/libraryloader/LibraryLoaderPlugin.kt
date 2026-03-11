@@ -23,9 +23,6 @@ class LibraryLoaderPlugin : Plugin<Project> {
             task.group = "library-loader"
             task.description = "Generates libraries.toml into resources"
 
-            task.repositories.set(
-                project.provider { extension.repositories }
-            )
             task.libraries.set(
                 project.provider { extension.libraries }
             )

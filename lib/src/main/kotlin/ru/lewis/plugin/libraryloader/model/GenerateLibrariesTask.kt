@@ -1,15 +1,12 @@
 package ru.lewis.plugin.libraryloader.model
 
 import org.gradle.api.DefaultTask
+import org.gradle.api.artifacts.repositories.MavenArtifactRepository
 import org.gradle.api.file.DirectoryProperty
-import org.gradle.api.provider.MapProperty
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.tasks.*
 
 abstract class GenerateLibrariesTask : DefaultTask() {
-
-    @get:Input
-    abstract val repositories: MapProperty<String, String>
 
     @get:Input
     abstract val libraries: ListProperty<String>
@@ -23,11 +20,24 @@ abstract class GenerateLibrariesTask : DefaultTask() {
         output.mkdirs()
 
         val file = output.resolve("libraries.toml")
-
         val sb = StringBuilder()
 
+        val repos = project.repositories
+            .filterIsInstance<MavenArtifactRepository>()
+            .associate { repo ->
+                val name = repo.name
+                    .lowercase()
+                    .replace(" ", "_")
+                    .replace("-", "_")
+                val url = repo.url.toString().trimEnd('/')
+                name to url
+            }
+
         sb.appendLine("[repositories]")
-        repositories.get().forEach { (name, url) ->
+        if (repos.none { it.value.contains("repo1.maven.org") }) {
+            sb.appendLine("""central = "https://repo1.maven.org/maven2"""")
+        }
+        repos.forEach { (name, url) ->
             sb.appendLine("""$name = "$url"""")
         }
 

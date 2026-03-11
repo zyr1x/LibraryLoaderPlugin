@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "io.github.zyr1x"
-version = "1.0.0"
+version = "1.0.1"
 
 gradlePlugin {
     website = "https://github.com/zyr1x/LibraryLoaderPlugin"
